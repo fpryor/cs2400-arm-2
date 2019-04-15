@@ -12,11 +12,11 @@
 		main
         		ADR		r0, numbers
 
-        		LDR		r1, [r0]
-        		LDR		r2, [r0, #4]
-        		MOV		r3, #0
-        		MOV		r4, #0
-        		MOV		r5, #0
+        		LDR		r1, [r0]		;first number
+        		LDR		r2, [r0, #4] 	;second number
+        		MOV		r3, #0          ;carry
+        		MOV		r4, #0          ;low bits
+        		MOV		r5, #0          ;high bits
         loop
         		TST		r2, #1
         		BEQ		shift
@@ -40,8 +40,9 @@
         		END
 
         negate
-        		MVN		r5, r5      ;flip bits and
-        		ADD		r5, r5, #1  ;two's complement
+        		MVN		r5, r5		;flip bits
+        		MVN		r4, r4		; flip bits
+        		ADD		r4, r4, #1  ;two's complement
         		B		finish
 
         numbers	DCD		0xA0BCFF0D, 0xFFF0ADEA
